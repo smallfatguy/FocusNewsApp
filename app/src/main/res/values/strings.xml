@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">News app</string>
+    <string name="update_period">Периодичность обновлений:</string>
+    <string name="days">Дни</string>
+    <string name="hours">Часы</string>
+    <string name="minutes">Минуты</string>
+    <string name="add_channel">Добавить канал</string>
+    <string name="add_new_channel">Добавить новый канал</string>
+    <string name="channels_tab_title">Каналы</string>
+    <string name="update_time_tab_title">Частота обновлений</string>
+    <string name="appearance_tab_title">Настройки</string>
+    <string name="open_in_browser">Открыть в браузере</string>
 </resources>
