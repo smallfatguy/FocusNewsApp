@@ -8,8 +8,9 @@ import com.belimov.FocusNewsApp.db.dao.NewsDao;
 import com.belimov.FocusNewsApp.db.entities.ChannelDbEntity;
 import com.belimov.FocusNewsApp.db.entities.NewsDbEntity;
 
-@Database(entities = {NewsDbEntity.class, ChannelDbEntity.class}, version = 1)
+@Database(entities = {NewsDbEntity.class, ChannelDbEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDB extends RoomDatabase {
     public abstract NewsDao newsDao();
+
     public abstract ChannelsDao channelsDao();
 }

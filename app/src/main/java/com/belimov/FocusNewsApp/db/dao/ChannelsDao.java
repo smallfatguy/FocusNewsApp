@@ -1,6 +1,5 @@
 package com.belimov.FocusNewsApp.db.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -14,11 +13,17 @@ import java.util.List;
 public interface ChannelsDao {
 
     @Query("SELECT * FROM ChannelDbEntity")
-   List<ChannelDbEntity> getChannels();
+    List<ChannelDbEntity> getChannels();
 
-    @Query("DELETE FROM ChannelDbEntity where url = :url")
+    @Query("SELECT url FROM ChannelDbEntity WHERE isActive")
+    String[] getChannelUrls();
+
+    @Query("DELETE FROM ChannelDbEntity WHERE url = :url")
     void delete(String url);
 
+    @Query("UPDATE ChannelDbEntity SET isActive = :state WHERE url = :url")
+    void changeChannelState(String url, boolean state);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(ChannelDbEntity news);
+    void insert(ChannelDbEntity channel);
 }

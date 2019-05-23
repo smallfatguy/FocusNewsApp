@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/add_feed_header"
+    <ProgressBar
+        android:id="@+id/loading_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset8"
-        android:padding="@dimen/offset4"
-        android:text="@string/add_new_channel"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:clickable="true"
+        android:scaleX="0.2"
+        android:scaleY="0.2"
+        android:focusable="true" />
 
-    <EditText
-        android:id="@+id/feed_url_input"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset4"
-        android:paddingEnd="@dimen/offset4"
-        android:paddingStart="@dimen/offset4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_feed_header"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/add_feed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_channel"
-        android:layout_margin="@dimen/offset4"
-        app:layout_constraintTop_toBottomOf="@id/feed_url_input"/>
+        <TextView
+            android:id="@+id/add_feed_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/offset8"
+            android:padding="@dimen/offset4"
+            android:text="@string/add_new_channel"
+            android:textSize="@dimen/text_large" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/settings_tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/add_feed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tabGravity="fill"
-        app:tabBackground="@color/grey"
-        app:tabSelectedTextColor="@color/white" />
+        <EditText
+            android:id="@+id/feed_url_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/offset4"
+            android:paddingStart="@dimen/offset4"
+            android:paddingEnd="@dimen/offset4" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/settings_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/settings_tab_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <Button
+            android:id="@+id/add_feed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/offset4"
+            android:text="@string/add_channel" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/settings_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@color/grey"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/white" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/settings_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</FrameLayout>

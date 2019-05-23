@@ -1,91 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/update_period_header"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/update_period"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/day_picker_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/offset80"
-        android:orientation="vertical"
-        android:padding="@dimen/offset4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/hour_picker_layout"
-        app:layout_constraintTop_toBottomOf="@id/update_period_header">
-
-        <NumberPicker
-            android:id="@+id/day_period_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/offset2"
-            android:text="@string/days"
-            android:textSize="@dimen/text_medium"
-            android:gravity="center_horizontal" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/hour_picker_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/offset4"
-        app:layout_constraintEnd_toStartOf="@id/min_picker_layout"
-        app:layout_constraintStart_toEndOf="@id/day_picker_layout"
-        app:layout_constraintTop_toBottomOf="@id/update_period_header">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <NumberPicker
-            android:id="@+id/hour_period_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false" />
+                <Switch
+                    android:id="@+id/auto_update_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/offset8" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/offset2"
-            android:text="@string/hours"
-            android:textSize="@dimen/text_medium" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/offset8"
+                    android:text="@string/enable_auto_update"
+                    android:textSize="@dimen/text_medium"/>
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/min_picker_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/offset4"
-        android:layout_marginRight="@dimen/offset80"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/hour_picker_layout"
-        app:layout_constraintTop_toBottomOf="@id/update_period_header">
+            <TextView
+                android:id="@+id/update_period_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/update_period"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <NumberPicker
-            android:id="@+id/min_period_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/offset2"
-            android:text="@string/minutes"
-            android:textSize="@dimen/text_medium"
-            android:gravity="center_horizontal" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/day_picker_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/offset4"
+                    app:layout_constraintEnd_toStartOf="@id/hour_picker_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/update_period_header">
+
+                    <NumberPicker
+                        android:id="@+id/day_period_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/offset2"
+                        android:text="@string/days"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/hour_picker_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/offset4"
+                    app:layout_constraintEnd_toStartOf="@id/min_picker_layout"
+                    app:layout_constraintStart_toEndOf="@id/day_picker_layout"
+                    app:layout_constraintTop_toBottomOf="@id/update_period_header">
+
+                    <NumberPicker
+                        android:id="@+id/hour_period_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/offset2"
+                        android:text="@string/hours"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/min_picker_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/offset4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/hour_picker_layout"
+                    app:layout_constraintTop_toBottomOf="@id/update_period_header">
+
+                    <NumberPicker
+                        android:id="@+id/minutes_period_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/offset2"
+                        android:text="@string/minutes"
+                        android:textSize="@dimen/text_medium" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

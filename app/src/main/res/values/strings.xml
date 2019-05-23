@@ -8,6 +8,9 @@
     <string name="add_new_channel">Добавить новый канал</string>
     <string name="channels_tab_title">Каналы</string>
     <string name="update_time_tab_title">Частота обновлений</string>
-    <string name="appearance_tab_title">Настройки</string>
     <string name="open_in_browser">Открыть в браузере</string>
+    <string name="empty_channel_input_error">Необходимо ввести адрес канала</string>
+    <string name="load_channels_error">Что-то пошло не так, повторите попытку</string>
+    <string name="no_active_channels">Похоже, у вас нет активных новостных каналов. \nДля добавления перейдите в настройки.</string>
+    <string name="enable_auto_update">Включить автообновление</string>
 </resources>

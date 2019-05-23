@@ -19,6 +19,9 @@ public interface NewsDao {
             " ChannelDbEntity WHERE ChannelDbEntity.isActive) ORDER BY pubDate DESC")
     List<NewsDbEntity> getNewsFromActiveChannels();
 
+    @Query("UPDATE NewsDbEntity SET isCollapsed = :state WHERE guid = :guid")
+    void changeNewsViewState(String guid, boolean state);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(NewsDbEntity news);
 }

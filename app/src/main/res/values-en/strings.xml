@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">News app</string>
+    <string name="update_period">Update period:</string>
+    <string name="days">Days</string>
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+    <string name="add_channel">Add channel</string>
+    <string name="add_new_channel">Add new channel</string>
+    <string name="channels_tab_title">Channels</string>
+    <string name="update_time_tab_title">Update frequency</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="empty_channel_input_error">Type channel url</string>
+    <string name="load_channels_error">Something gone wrong, please retry</string>
+    <string name="no_active_channels">Seems like you didn\'t have active news channels. \nPlease follow to settings, to add them.</string>
+    <string name="enable_auto_update">Enable autoupdate</string>
+</resources>

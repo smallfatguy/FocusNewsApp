@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.belimov.FocusNewsApp">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -11,25 +12,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.news.presentation.NewsFeedActivity">
+        <activity
+            android:name=".features.news.presentation.NewsFeedActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.settings.presentation.SettingsActivity" >
+        <activity
+            android:name=".features.settings.presentation.SettingsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="https"/>
-                <data android:scheme="http"/>
-                <data android:host="*.com"/>
-                <data android:host="*.ru"/>
-                <data android:pathPattern="/.*\.xml"/>
-                <data android:pathPattern="/.*\.rss"/>
-                <data android:pathPattern=".*rss.*"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:host="*.com" />
+                <data android:host="*.ru" />
+                <data android:host="*.io" />
+                <data android:host="*.org" />
+                <data android:pathPattern="/.*\.xml" />
+                <data android:pathPattern="/.*\.rss" />
+                <data android:pathPattern=".*rss.*" />
+                <data android:pathPattern=".*feed.*" />
             </intent-filter>
         </activity>
     </application>
