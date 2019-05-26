@@ -1,4 +1,4 @@
-package com.belimov.FocusNewsApp.features.settings.loader;
+package com.belimov.FocusNewsApp.features.newsloader.data;
 
 import android.util.Log;
 
@@ -6,7 +6,6 @@ import com.belimov.FocusNewsApp.db.entities.ChannelDbEntity;
 import com.belimov.FocusNewsApp.db.entities.NewsDbEntity;
 import com.belimov.FocusNewsApp.features.channels.data.ChannelDto;
 import com.belimov.FocusNewsApp.features.news.data.NewsDto;
-import com.belimov.FocusNewsApp.features.settings.loader.data.NewsLoaderRepository;
 import com.belimov.FocusNewsApp.utils.DatePicker;
 
 import org.xmlpull.v1.XmlPullParser;

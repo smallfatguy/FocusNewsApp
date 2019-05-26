@@ -1,7 +1,6 @@
-package com.belimov.FocusNewsApp.features.settings.loader;
+package com.belimov.FocusNewsApp.features.newsloader;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Data;
@@ -10,8 +9,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.belimov.FocusNewsApp.features.settings.loader.data.NewsLoaderRepository;
-import com.belimov.FocusNewsApp.features.settings.loader.data.NewsLoaderRepositoryImpl;
+import com.belimov.FocusNewsApp.features.newsloader.data.NewsLoaderRepositoryImpl;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -20,9 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LoaderWorker extends Worker {
 
-    private final static String TAG = "Worker";
-
-    public final static String INPUT_URLS_KEY = "input_urls_key";
+    public final static String INPUT_URL_KEY = "input_url_key";
     public final static String AUTOUPDATE_TAG = "autoupdate";
 
     public static OneTimeWorkRequest createOneTimeWork(final Data inputData) {
@@ -45,23 +41,11 @@ public class LoaderWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final NewsLoaderRepository repository = new NewsLoaderRepositoryImpl();
-
-        String[] urls = getInputData().getStringArray(INPUT_URLS_KEY);
-
-        if (urls == null) {
-            urls = repository.getChannelUrls();
+        try {
+            new NewsLoaderRepositoryImpl().loadFeed(getInputData().getString(INPUT_URL_KEY));
+        } catch (IOException | XmlPullParserException e) {
+            return Result.failure();
         }
-
-        for (final String url : urls) {
-            try {
-                FeedParser.parseFeed(url, repository);
-            } catch (XmlPullParserException | IOException e) {
-                Log.e(TAG, e.toString());
-                return Result.failure();
-            }
-        }
-
         return Result.success();
     }
 }

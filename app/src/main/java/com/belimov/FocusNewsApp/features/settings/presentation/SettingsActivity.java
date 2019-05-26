@@ -21,13 +21,9 @@ import com.belimov.FocusNewsApp.features.BaseActivity;
 import com.belimov.FocusNewsApp.features.MvpPresenter;
 import com.belimov.FocusNewsApp.features.MvpView;
 import com.belimov.FocusNewsApp.features.news.presentation.NewsFeedActivity;
-import com.belimov.FocusNewsApp.utils.PreferenceUtils;
 import com.google.android.material.tabs.TabLayout;
 
 public class SettingsActivity extends BaseActivity implements SettingsView {
-
-    private static final String CHANNEL_INPUT_PREF = "channel input";
-    private static final String LAST_OPENED_TAB_PREF = "last opened tab";
 
     private SettingsPresenter presenter;
 
@@ -46,7 +42,7 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
 
     @Override
     protected MvpPresenter<SettingsView> getPresenter() {
-        presenter = new SettingsPresenter();
+        presenter = SettingsPresenterFactory.createPresenter(this);
         return presenter;
     }
 
@@ -75,7 +71,7 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
     @Override
     protected void onPause() {
         super.onPause();
-        PreferenceUtils.saveString(getApplicationContext(), CHANNEL_INPUT_PREF, getTextFromField());
+        presenter.saveChannelInput(getTextFromField());
     }
 
     @Override
@@ -92,9 +88,6 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
         feedUrlInput = findViewById(R.id.feed_url_input);
         addFeed = findViewById(R.id.add_feed);
         loadingProgressBar = findViewById(R.id.loading_bar);
-
-        setChannelInput();
-
         addFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,9 +111,6 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        final int lastTab = PreferenceUtils.loadInteger(getApplicationContext(), LAST_OPENED_TAB_PREF, 0);
-        viewPager.setCurrentItem(lastTab);
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -128,7 +118,7 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
 
             @Override
             public void onPageSelected(int position) {
-                PreferenceUtils.saveInteger(getApplicationContext(), LAST_OPENED_TAB_PREF, position);
+                presenter.saveCurrentTab(position);
             }
 
             @Override
@@ -150,11 +140,12 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setChannelInput() {
+    @Override
+    public void setChannelInput(final String oldLink) {
         clearChannelInput();
         String link = getIntent().getDataString();
         if (link == null || link.isEmpty()) {
-            link = PreferenceUtils.loadString(getApplicationContext(), CHANNEL_INPUT_PREF);
+            link = oldLink;
         }
         feedUrlInput.setText(link);
     }
@@ -200,6 +191,11 @@ public class SettingsActivity extends BaseActivity implements SettingsView {
         if (view != null && inputMethodManager != null) {
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    public void setCurrentTab(final int tab) {
+        viewPager.setCurrentItem(tab);
     }
 
     private void returnToNews() {

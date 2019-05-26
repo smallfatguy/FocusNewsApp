@@ -19,4 +19,8 @@ interface SettingsView extends MvpView {
     void refreshViewPager();
 
     void hideKeyboard();
+
+    void setCurrentTab(int tab);
+
+    void setChannelInput(String oldLink);
 }

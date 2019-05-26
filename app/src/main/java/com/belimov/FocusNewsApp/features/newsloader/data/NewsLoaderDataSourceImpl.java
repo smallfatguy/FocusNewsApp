@@ -1,4 +1,4 @@
-package com.belimov.FocusNewsApp.features.settings.loader.data;
+package com.belimov.FocusNewsApp.features.newsloader.data;
 
 import com.belimov.FocusNewsApp.App;
 import com.belimov.FocusNewsApp.db.dao.ChannelsDao;

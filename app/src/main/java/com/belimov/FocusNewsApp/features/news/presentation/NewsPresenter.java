@@ -4,15 +4,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkInfo;
-import androidx.work.WorkManager;
 
 import com.belimov.FocusNewsApp.R;
 import com.belimov.FocusNewsApp.features.MvpPresenter;
 import com.belimov.FocusNewsApp.features.news.domain.NewsInteractor;
 import com.belimov.FocusNewsApp.features.news.domain.model.News;
-import com.belimov.FocusNewsApp.features.settings.loader.LoaderWorker;
+import com.belimov.FocusNewsApp.features.newsloader.LoaderWorker;
+import com.belimov.FocusNewsApp.utils.Callback;
 import com.belimov.FocusNewsApp.utils.DataListener;
+import com.belimov.FocusNewsApp.utils.WorkerUtils;
 
 import java.util.List;
 
@@ -54,21 +54,20 @@ public class NewsPresenter extends MvpPresenter<NewsView> {
     public void refreshAllNews() {
         view.showRefreshing();
         final OneTimeWorkRequest refreshAllNewsWork = LoaderWorker.createOneTimeWork(new Data.Builder().build());
-        WorkManager.getInstance().enqueue(refreshAllNewsWork);
 
-        WorkManager.getInstance().getWorkInfoByIdLiveData(refreshAllNewsWork.getId())
-                .observe(view, new Observer<WorkInfo>() {
-                    @Override
-                    public void onChanged(WorkInfo workInfo) {
-                        if (workInfo != null && workInfo.getState() == WorkInfo.State.SUCCEEDED) {
-                            loadNews();
-                            view.hideRefreshing();
-                        } else if (workInfo.getState() == WorkInfo.State.FAILED) {
-                            view.hideRefreshing();
-                            view.showToast(view.getStringResource(R.string.load_channels_error));
-                        }
-                    }
-                });
+        WorkerUtils.runWork(view, refreshAllNewsWork, new Callback() {
+            @Override
+            public void onSuccess() {
+                loadNews();
+                view.hideRefreshing();
+            }
+
+            @Override
+            public void onFailure() {
+                view.hideRefreshing();
+                view.showToast(view.getStringResource(R.string.load_channels_error));
+            }
+        });
     }
 
     private void loadNews() {

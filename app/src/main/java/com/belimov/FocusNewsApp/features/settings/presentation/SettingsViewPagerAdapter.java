@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.belimov.FocusNewsApp.R;
 import com.belimov.FocusNewsApp.features.channels.presentation.ChannelsFragment;
-import com.belimov.FocusNewsApp.features.settings.loader.UpdateTimeFragment;
+import com.belimov.FocusNewsApp.features.updatescheduler.presentation.UpdateSchedulerFragment;
 
 public class SettingsViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -53,7 +53,7 @@ public class SettingsViewPagerAdapter extends FragmentStatePagerAdapter {
             case CHANNELS_FRAGMENT:
                 return new ChannelsFragment();
             case UPDATE_TIME_FRAGMENT:
-                return new UpdateTimeFragment();
+                return new UpdateSchedulerFragment();
             default:
                 throw new IllegalStateException("Неизвестный индекс фрагмента");
         }
