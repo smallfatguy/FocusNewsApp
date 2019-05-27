@@ -32,23 +32,31 @@ public class NewsPresenter extends MvpPresenter<NewsView> {
     }
 
     void expandNews(final String guid) {
-        new Thread(new Runnable() {
+        interactor.expandNews(guid, new Callback() {
             @Override
-            public void run() {
-                interactor.expandNews(guid);
+            public void onSuccess() {
                 loadNews();
             }
-        }).start();
+
+            @Override
+            public void onFailure() {
+            }
+        });
+
     }
 
     void collapseNews(final String guid) {
-        new Thread(new Runnable() {
+        interactor.collapseNews(guid, new Callback() {
             @Override
-            public void run() {
-                interactor.collapseNews(guid);
+            public void onSuccess() {
                 loadNews();
             }
-        }).start();
+
+            @Override
+            public void onFailure() {
+            }
+        });
+
     }
 
     public void refreshAllNews() {
@@ -71,17 +79,12 @@ public class NewsPresenter extends MvpPresenter<NewsView> {
     }
 
     private void loadNews() {
-        new Thread(new Runnable() {
+        interactor.loadNews(new DataListener<List<News>>() {
             @Override
-            public void run() {
-                interactor.loadNews(new DataListener<List<News>>() {
-                    @Override
-                    public void onChanged(List<News> data) {
-                        newsList.postValue(data);
-                    }
-                });
+            public void onChanged(List<News> data) {
+                newsList.postValue(data);
             }
-        }).start();
+        });
     }
 
     private void attachDataObserver() {

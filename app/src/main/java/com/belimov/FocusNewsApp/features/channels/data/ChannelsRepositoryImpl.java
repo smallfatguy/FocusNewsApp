@@ -3,6 +3,7 @@ package com.belimov.FocusNewsApp.features.channels.data;
 import com.belimov.FocusNewsApp.features.channels.domain.ChannelsRepository;
 import com.belimov.FocusNewsApp.features.channels.domain.model.Channel;
 import com.belimov.FocusNewsApp.utils.DataListener;
+import com.belimov.FocusNewsApp.utils.Callback;
 
 import java.util.List;
 
@@ -20,13 +21,8 @@ public class ChannelsRepositoryImpl implements ChannelsRepository {
     }
 
     @Override
-    public void createChannel(final Channel channel) {
-        dataSource.createChannel(new ChannelDto(channel));
-    }
-
-    @Override
-    public void deleteChannel(final String url) {
-        dataSource.deleteChannel(url);
+    public void deleteChannel(final String url, final Callback callback) {
+        dataSource.deleteChannel(url, callback);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.belimov.FocusNewsApp.features.channels.domain;
 
 import com.belimov.FocusNewsApp.features.channels.domain.model.Channel;
 import com.belimov.FocusNewsApp.utils.DataListener;
+import com.belimov.FocusNewsApp.utils.Callback;
 
 import java.util.List;
 
@@ -19,13 +20,8 @@ public class ChannelsInteractorImpl implements ChannelsInteractor {
     }
 
     @Override
-    public void deleteChannel(final String url) {
-        repository.deleteChannel(url);
-    }
-
-    @Override
-    public void createChannel(final Channel channel) {
-        repository.createChannel(channel);
+    public void deleteChannel(final String url, final Callback callback) {
+        repository.deleteChannel(url, callback);
     }
 
     @Override

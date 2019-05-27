@@ -2,6 +2,7 @@ package com.belimov.FocusNewsApp.features.news.data;
 
 import com.belimov.FocusNewsApp.features.news.domain.NewsRepository;
 import com.belimov.FocusNewsApp.features.news.domain.model.News;
+import com.belimov.FocusNewsApp.utils.Callback;
 import com.belimov.FocusNewsApp.utils.DataListener;
 
 import java.util.List;
@@ -20,12 +21,7 @@ public class NewsRepositoryImpl implements NewsRepository {
     }
 
     @Override
-    public void createNews(final News news) {
-        dataSource.createNews(new NewsDto(news));
-    }
-
-    @Override
-    public void changeNewsViewState(final String guid, final boolean state) {
-        dataSource.changeNewsViewState(guid, state);
+    public void changeNewsViewState(final String guid, final boolean state, final Callback callback) {
+        dataSource.changeNewsViewState(guid, state, callback);
     }
 }
